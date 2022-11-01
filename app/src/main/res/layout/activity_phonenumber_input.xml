@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Phonenumber_input">
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:layout_marginBottom="300dp">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/PhoneNumber_inputPage_header"
+            android:textColor="#006400"
+            android:textSize="@dimen/phoneNumber_inputPage_header1_size"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="18dp" />
+           <Space
+               android:layout_width="match_parent"
+               android:layout_height="100dp"/>
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phoneNumber_inputPage_header2"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteY="66dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phoneNumber_inputPage_header3"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteY="84dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/phoneNumber_inputPage_header4"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteY="103dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/phone_spinner"
+                android:layout_width="@dimen/phoneNumber_inputPage_spinner1_width"
+                android:layout_height="@dimen/phoneNumber_inputPage_spinner1_height"
+                android:textAlignment="center"
+                tools:layout_editor_absoluteX="78dp"
+                tools:layout_editor_absoluteY="125dp" />
+            <Spinner
+                android:id="@+id/spinner_country"
+                android:layout_width="@dimen/phoneNumber_inputPage_spinner2_width"
+                android:layout_height="@dimen/phoneNumber_inputPage_spinner2_height"
+                android:textAlignment="center"
+                tools:layout_editor_absoluteX="78dp"
+                tools:layout_editor_absoluteY="125dp" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="@dimen/phoneNumber_inputPage_editText_phone_number_width"
+            android:layout_height="@dimen/phoneNumber_inputPage_editText_phone_number_height"
+            android:hint="@string/phoneNumber_inputPage_number_editText"
+            android:textAlignment="viewStart"
+            android:inputType="phone"
+            tools:layout_editor_absoluteX="80dp"
+            tools:layout_editor_absoluteY="178dp" />
+
+        <Button
+            android:id="@+id/otp_button"
+            android:layout_width="@dimen/phoneNumber_inputPage_nextBtn_width"
+            android:layout_height="wrap_content"
+            android:text="@string/phoneNumber_inputPage_nextBtn"
+            tools:layout_editor_absoluteX="152dp"
+            tools:layout_editor_absoluteY="264dp" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

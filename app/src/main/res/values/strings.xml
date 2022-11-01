@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">WhatsAppClone(1)</string>
+    <!--firstScreen page -->
+    <string name="firstScreen_header">Welcome to whatsapp</string>
+    <string name="firstScreen_agree_btn">AGREE AND CONTINUE</string>
+    <!--phoneNumberInput page -->
+    <string name="PhoneNumber_inputPage_header">Verify your phone number</string>
+    <string name="phoneNumber_inputPage_header2">WhatsApp will send an SMS message to verify your</string>
+    <string name="phoneNumber_inputPage_header3">phone number. Enter your country code and phone</string>
+    <string name="phoneNumber_inputPage_header4">number.</string>
+    <string name="phoneNumber_inputPage_number_editText">Phone number</string>
+    <string name="phoneNumber_inputPage_nextBtn">Next</string>
+    <!--phoneVerify page -->
+    <string name="phoneNumber_veriyPage_header1">Verify +91 9787633174</string>
+    <string name="phoneNumber_verifyPage_header2">Enter your otp Message send to 9787633174</string>
+    <string name="phoneNumber_verifyPage_wrongnum">Wrong number ?</string>
+    <string name="phoneNumber_verifyPage_editText_hint">otp</string>
+    <string name="phoneNumber_verifyPage_textView_code">Enter your 6-digit code</string>
+    <string name="phoneNumber_verifyPage_verifyBtn_text">verify</string>
+    <string-array name="country_name">
+        <item>India</item>
+        <item>China</item>
+        <item>Australia</item>
+    </string-array>
+    <string-array name="country_code">
+        <item>+91</item>
+        <item>+86</item>
+        <item>+61</item>
+    </string-array>
+</resources>
