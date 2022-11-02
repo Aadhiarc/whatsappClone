@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -126,6 +127,7 @@ public class PhoneNumberVerification extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(PhoneNumberVerification.this, "Verification completed successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(PhoneNumberVerification.this, Tabbed_layout.class));
                     }
                     }
                 });
