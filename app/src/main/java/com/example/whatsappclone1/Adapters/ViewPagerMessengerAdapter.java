@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.whatsappclone1.Fragments.CallsFragment;
 import com.example.whatsappclone1.Fragments.CameraFragment;
 import com.example.whatsappclone1.Fragments.ChatsFragment;
-import com.example.whatsappclone1.StatusFragment;
+import com.example.whatsappclone1.Fragments.StatusFragment;
 
 public class ViewPagerMessengerAdapter extends FragmentPagerAdapter {
     private String[] tabTitles = new String[]{"", "CHATS", "STATUS","CALLS"};
@@ -29,10 +29,13 @@ public class ViewPagerMessengerAdapter extends FragmentPagerAdapter {
             return new CameraFragment();
         }else if(position==1){
             return new ChatsFragment();
+
         }else if(position==2){
             return new StatusFragment();
+
         }else {
             return new CallsFragment();
+
         }
     }
 

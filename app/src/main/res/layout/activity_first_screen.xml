@@ -85,6 +85,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/agree_continue_btn"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
