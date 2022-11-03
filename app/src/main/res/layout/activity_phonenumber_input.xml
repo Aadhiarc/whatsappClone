@@ -99,6 +99,7 @@
             android:layout_width="@dimen/phoneNumber_inputPage_nextBtn_width"
             android:layout_height="wrap_content"
             android:text="@string/phoneNumber_inputPage_nextBtn"
+            android:backgroundTint="@color/light_green"
             tools:layout_editor_absoluteX="152dp"
             tools:layout_editor_absoluteY="264dp" />
 

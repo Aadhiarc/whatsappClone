@@ -1,11 +1,15 @@
-package com.example.whatsappclone1;
+package com.example.whatsappclone1.Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
+
+import com.example.whatsappclone1.Fragments.CallsFragment;
+import com.example.whatsappclone1.Fragments.CameraFragment;
+import com.example.whatsappclone1.Fragments.ChatsFragment;
+import com.example.whatsappclone1.StatusFragment;
 
 public class ViewPagerMessengerAdapter extends FragmentPagerAdapter {
     private String[] tabTitles = new String[]{"", "CHATS", "STATUS","CALLS"};
@@ -36,5 +40,6 @@ public class ViewPagerMessengerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 4;
     }
+
 
 }

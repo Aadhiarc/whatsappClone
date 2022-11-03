@@ -35,6 +35,7 @@ public class PhoneNumberVerification extends AppCompatActivity {
          FirebaseAuth auth;
          String verificationId;
          TextView phonenumber,phonenumber2,wrong_num;
+         String number;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class PhoneNumberVerification extends AppCompatActivity {
         wrong_num.setMovementMethod(LinkMovementMethod.getInstance());
         auth=FirebaseAuth.getInstance();
         Intent intent=getIntent();
-        String number=intent.getStringExtra("phone_number");
+        number=intent.getStringExtra("phone_number");
         phonenumber.setText("Verify +91"+number);
         phonenumber2.setText("Enter your otp.Message send to"+" "+number);
         wrong_num=findViewById(R.id.wrong_number_button);
@@ -108,7 +109,7 @@ public class PhoneNumberVerification extends AppCompatActivity {
 
         @Override
         public void onCodeSent(@NonNull String s,
-                @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
             super.onCodeSent(s,token);
             verificationId=s;
 
@@ -127,11 +128,11 @@ public class PhoneNumberVerification extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(PhoneNumberVerification.this, "Verification completed successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(PhoneNumberVerification.this, Tabbed_layout.class));
+                        Intent intent=new Intent(PhoneNumberVerification.this,Profileinfo.class);
+                        intent.putExtra("phoneNumber",number);
+                        startActivity(intent);
                     }
                     }
                 });
-
-
     }
 }
