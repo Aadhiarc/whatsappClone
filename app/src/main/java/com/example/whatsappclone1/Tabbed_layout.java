@@ -58,6 +58,9 @@ public class Tabbed_layout extends AppCompatActivity {
     }
 
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

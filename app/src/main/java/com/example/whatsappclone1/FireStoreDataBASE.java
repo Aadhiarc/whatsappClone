@@ -1,9 +1,14 @@
 package com.example.whatsappclone1;
 
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +21,10 @@ public class FireStoreDataBASE {
     FirebaseAuth auth;
     FirebaseFirestore fireStore;
     String userID;
-   void dataPut(String user_name,String user_dp,String user_mob){
+    FirebaseStorage firebaseStorage;
+    StorageReference storageReference;
+
+    void dataPut(String user_name,String user_dp,String user_mob){
        fireStore= FirebaseFirestore.getInstance();
        auth=FirebaseAuth.getInstance();
         userID =  auth.getCurrentUser().getUid();
@@ -30,9 +38,23 @@ public class FireStoreDataBASE {
 
            public void onSuccess(Void unused) {
                System.out.println("successfully");
-
+               sendImageStorage();
            }
        });
 
+    }
+
+    private void sendImageStorage(){
+        firebaseStorage=FirebaseStorage.getInstance();
+        storageReference=firebaseStorage.getReference();
+
+        StorageReference imageRef=storageReference.child("Images").child(auth.getUid()).child("Profile pic");
+        // compress image for easy access
+        Bitmap bitmap=null;
+        try{
+
+        }catch (Exception e){
+
+        }
     }
 }
