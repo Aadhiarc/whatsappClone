@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -19,7 +20,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,11 +36,14 @@ public class PhoneNumberVerification extends AppCompatActivity {
          String verificationId;
          TextView phonenumber,phonenumber2,wrong_num;
          String number;
+         SharedPreferences sharedPreferences;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number_verification);
+        sharedPreferences=getSharedPreferences("user_phone_number",MODE_PRIVATE);
         otp=findViewById(R.id.Otp);
         otp_verify_btn=findViewById(R.id.verify_btn);
         phonenumber=findViewById(R.id.phone_number_header);
@@ -128,6 +131,9 @@ public class PhoneNumberVerification extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(PhoneNumberVerification.this, "Verification completed successfully", Toast.LENGTH_SHORT).show();
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("userPhoneNumber", number);
+                        editor.commit();
                         Intent intent=new Intent(PhoneNumberVerification.this,Profileinfo.class);
                         intent.putExtra("phoneNumber",number);
                         startActivity(intent);

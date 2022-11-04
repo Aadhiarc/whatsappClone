@@ -1,7 +1,5 @@
 package com.example.whatsappclone1;
 
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -9,9 +7,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executor;
 
 public class FireStoreDataBASE {
+
+    public static final String USER_NICKNAME = "userNickname";
+    public static final String USER_PROFILEPIC = "userProfilepic";
+    public static final String USER_PHONENUMBER = "userPhonenumber";
     FirebaseAuth auth;
     FirebaseFirestore fireStore;
     String userID;
@@ -21,13 +22,15 @@ public class FireStoreDataBASE {
         userID =  auth.getCurrentUser().getUid();
        DocumentReference documentReference=fireStore.collection("AllUsers").document(userID);
        Map<String,Object> user=new HashMap<>();
-       user.put("userNickname",user_name);
-       user.put("userProfilepic",user_dp);
-       user.put("userPhonenumber",user_mob);
+       user.put(USER_NICKNAME,user_name);
+       user.put(USER_PROFILEPIC,user_dp);
+       user.put(USER_PHONENUMBER,user_mob);
        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
            @Override
+
            public void onSuccess(Void unused) {
                System.out.println("successfully");
+
            }
        });
 

@@ -36,7 +36,7 @@ public class Tabbed_layout extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.camera_icon);
 
 
-
+        viewPager.setCurrentItem(1,false);
         //To reduce the size of camera tab
         LinearLayout layout = ((LinearLayout) ((LinearLayout) tabLayout.getChildAt(0)).getChildAt(0));
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();

@@ -1,10 +1,13 @@
 package com.example.whatsappclone1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.whatsappclone1.FireBaseCloudMessaging.MessagingService;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Splashscreen extends AppCompatActivity {
@@ -16,15 +19,13 @@ public class Splashscreen extends AppCompatActivity {
         setContentView(R.layout.activity_splashscreen);
         auth=FirebaseAuth.getInstance();
         try{
-            userID=auth.getCurrentUser().getUid();
-            System.out.println(userID);
-            if(userID!=null){
-                Intent intent=new Intent(Splashscreen.this,Tabbed_layout.class);
-
+            if(FirebaseAuth.getInstance().getCurrentUser()!=null){
                 startActivity(new Intent(Splashscreen.this,Tabbed_layout.class));
+            }else if(FirebaseAuth.getInstance().getCurrentUser()==null){
+                startActivity(new Intent(Splashscreen.this,FirstScreen.class));
             }
         }catch (Exception e){
-            startActivity(new Intent(Splashscreen.this,FirstScreen.class));
+
         }
 
     }

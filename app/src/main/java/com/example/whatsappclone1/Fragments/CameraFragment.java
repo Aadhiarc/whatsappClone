@@ -33,7 +33,7 @@ public class CameraFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        startActivity(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
+//        startActivity(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
     }
 
     @Override

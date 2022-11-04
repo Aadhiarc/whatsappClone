@@ -69,6 +69,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:orientation="horizontal">
+
             <Spinner
                 android:id="@+id/phone_spinner"
                 android:layout_width="@dimen/phoneNumber_inputPage_spinner1_width"
