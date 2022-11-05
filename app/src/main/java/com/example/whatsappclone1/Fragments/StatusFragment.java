@@ -50,17 +50,17 @@ public class StatusFragment extends Fragment {
 
 
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
     @Override
     public void onResume() {
         super.onResume();
         edit.setAnimation(slide_up);
+        edit.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        edit.setAnimation(slide_down);
         edit.setVisibility(View.VISIBLE);
     }
 }
