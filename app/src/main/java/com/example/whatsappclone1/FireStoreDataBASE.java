@@ -1,7 +1,9 @@
 package com.example.whatsappclone1;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.provider.MediaStore;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +25,7 @@ public class FireStoreDataBASE {
     String userID;
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
+    String imageUriAccessToken;
 
     void dataPut(String user_name,String user_dp,String user_mob){
        fireStore= FirebaseFirestore.getInstance();
@@ -38,23 +41,8 @@ public class FireStoreDataBASE {
 
            public void onSuccess(Void unused) {
                System.out.println("successfully");
-               sendImageStorage();
            }
        });
 
-    }
-
-    private void sendImageStorage(){
-        firebaseStorage=FirebaseStorage.getInstance();
-        storageReference=firebaseStorage.getReference();
-
-        StorageReference imageRef=storageReference.child("Images").child(auth.getUid()).child("Profile pic");
-        // compress image for easy access
-        Bitmap bitmap=null;
-        try{
-
-        }catch (Exception e){
-
-        }
     }
 }

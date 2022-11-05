@@ -20,6 +20,7 @@ public class Splashscreen extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         try{
             if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+
                 startActivity(new Intent(Splashscreen.this,Tabbed_layout.class));
             }else if(FirebaseAuth.getInstance().getCurrentUser()==null){
                 startActivity(new Intent(Splashscreen.this,FirstScreen.class));

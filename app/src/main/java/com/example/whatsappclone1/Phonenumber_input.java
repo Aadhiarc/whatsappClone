@@ -25,7 +25,6 @@ public class Phonenumber_input extends AppCompatActivity {
        Button next;
     Spinner spinner_country,spinner_code;
     LoadingDialogue dialogue;
-     AlertDialog alertDialog;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

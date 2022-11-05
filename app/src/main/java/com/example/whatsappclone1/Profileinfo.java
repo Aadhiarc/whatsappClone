@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -26,6 +27,13 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.WeakHashMap;
+
 public class Profileinfo extends AppCompatActivity {
     ImageView openCamera;
     CardView cardView;
@@ -33,6 +41,8 @@ public class Profileinfo extends AppCompatActivity {
     Bitmap profilePhoto;
     Button next;
     private Uri imagePath;
+    Uri imageUri;
+    int type_check;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -75,7 +85,7 @@ public class Profileinfo extends AppCompatActivity {
         dialog.setContentView(R.layout.cameraallerydialog);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show();
-       ShapeableImageView camera= dialog.findViewById(R.id.camera_button);
+        ShapeableImageView camera= dialog.findViewById(R.id.camera_button);
         ShapeableImageView gallery=dialog.findViewById(R.id.gallery_button);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,13 +111,40 @@ public class Profileinfo extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==138&&resultCode==RESULT_OK)
         {
+             type_check=1;
             imagePath=data.getData();
             openCamera.setImageURI(imagePath);
         }else if(requestCode==100&&resultCode==RESULT_OK){
+             type_check=2;
             profilePhoto=(Bitmap)data.getExtras().get("data");
-            openCamera.setImageBitmap(profilePhoto);
+             //to convert image quality
+            WeakReference<Bitmap> result1=new WeakReference<>(Bitmap.createScaledBitmap(profilePhoto,profilePhoto.getHeight(),profilePhoto.getWidth(),false)
+                    .copy(Bitmap.Config.RGB_565,true));
+            Bitmap bm=result1.get();
+            imageUri=saveImage(bm,Profileinfo.this);
+            openCamera.setImageURI(imageUri);
         }
 
+    }
+
+    private Uri saveImage(Bitmap image, Profileinfo context) {
+        File imagesFolder=new File(context.getCacheDir(),"images");
+        Uri uri=null;
+        try{
+            imagesFolder.mkdirs();
+            File file=new File(imagesFolder,"captured_image.jpg");
+            FileOutputStream stream=new FileOutputStream(file);
+            //compress the image
+            image.compress(Bitmap.CompressFormat.JPEG,100,stream);
+            stream.flush();
+            stream.close();
+            uri = FileProvider.getUriForFile(context.getApplicationContext(),"com.example.whatsappclone1"+".provider",file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  uri;
     }
 
     private void requestStoragePermission() {
@@ -137,8 +174,15 @@ public class Profileinfo extends AppCompatActivity {
         Intent intent = getIntent();
         String phone_number = intent.getStringExtra("phoneNumber");
         String profile_name = userName.getText().toString();
-        String profile_photo = String.valueOf(profilePhoto);
+        String profile_camera_photo = String.valueOf(imageUri);
+        String profile_gallery_photo= String.valueOf(imagePath);
         FireStoreDataBASE fireStoreDataBASE = new FireStoreDataBASE();
-        fireStoreDataBASE.dataPut(profile_name, profile_photo, phone_number);
+        // to put captured image and gallery image
+        if(type_check==2){
+            fireStoreDataBASE.dataPut(profile_name, profile_camera_photo, phone_number);
+        }else if(type_check==1){
+            fireStoreDataBASE.dataPut(profile_name, profile_gallery_photo, phone_number);
+        }
+
     }
 }
