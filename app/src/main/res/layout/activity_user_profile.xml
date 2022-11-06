@@ -5,5 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserProfile">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Settings_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/dark_green"
+        app:titleTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:id="@+id/Settings_back_button"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textColor="@color/white"
+                android:layout_toRightOf="@id/Settings_back_button"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <RelativeLayout
+        android:id="@+id/Settings_page_user_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/Settings_toolbar"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Settings_profile_cardview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:layout_marginStart="10dp"
+            app:cardCornerRadius="100dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/Settings_camera_image_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_person"></com.google.android.material.imageview.ShapeableImageView>
+        </androidx.cardview.widget.CardView>
+         <TextView
+             android:id="@+id/Settings_user_profile_name"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="user name"
+             android:layout_toRightOf="@id/Settings_profile_cardview"
+             android:layout_marginStart="10dp"
+             android:layout_marginTop="10dp"
+             android:textSize="20sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hey there! I am using WhatsApp."
+            android:layout_below="@id/Settings_user_profile_name"
+            android:layout_toRightOf="@id/Settings_profile_cardview"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"/>
+
+
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

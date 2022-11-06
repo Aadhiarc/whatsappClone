@@ -1,10 +1,5 @@
 package com.example.whatsappclone1;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -20,12 +15,12 @@ public class FireStoreDataBASE {
     public static final String USER_NICKNAME = "userNickname";
     public static final String USER_PROFILEPIC = "userProfilepic";
     public static final String USER_PHONENUMBER = "userPhonenumber";
+    public static final String STATUS = "Status";
     FirebaseAuth auth;
     FirebaseFirestore fireStore;
     String userID;
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
-    String imageUriAccessToken;
 
     void dataPut(String user_name,String user_dp,String user_mob){
        fireStore= FirebaseFirestore.getInstance();
@@ -36,6 +31,7 @@ public class FireStoreDataBASE {
        user.put(USER_NICKNAME,user_name);
        user.put(USER_PROFILEPIC,user_dp);
        user.put(USER_PHONENUMBER,user_mob);
+       user.put(STATUS,"online");
        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
            @Override
 
