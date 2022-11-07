@@ -1,25 +1,35 @@
 package com.example.whatsappclone1.Fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.whatsappclone1.Contacts;
+import com.example.whatsappclone1.PersonalChat;
 import com.example.whatsappclone1.R;
 import com.example.whatsappclone1.userModel.UserModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 public class ChatsFragment extends Fragment {
@@ -29,12 +39,16 @@ public class ChatsFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     FirestoreRecyclerAdapter<UserModel, NoteViewHolder> ChatAdapter;
     RecyclerView ChatRecyclerView;
-
-
+     FloatingActionButton Contact;
+     String userId;
+     UserModel userModel;
+    SharedPreferences sharedPreferences;
     public ChatsFragment() {
 
     }
 
+
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,8 +57,17 @@ public class ChatsFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         ChatRecyclerView = v.findViewById(R.id.RecyclerView);
-
-        Query query = firestore.collection("AllUsers");
+        Contact=v.findViewById(R.id.chats_floating_action_button);
+        userModel=new UserModel();
+        sharedPreferences= getActivity().getSharedPreferences("user_phone_number", MODE_PRIVATE);
+        String userMobileNumber = sharedPreferences.getString("userPhoneNumber", "");
+        Query query = firestore.collection("AllUsers").whereNotEqualTo("userPhonenumber", userMobileNumber);
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                System.out.println(queryDocumentSnapshots.size());
+            }
+        });
         FirestoreRecyclerOptions<UserModel> allusers = new FirestoreRecyclerOptions.Builder<UserModel>().setQuery(query, UserModel.class).build();
         ChatAdapter =new FirestoreRecyclerAdapter<UserModel, NoteViewHolder>(allusers) {
             @Override
@@ -62,7 +85,12 @@ public class ChatsFragment extends Fragment {
                        holder.itemView.setOnClickListener(new View.OnClickListener() {
                            @Override
                            public void onClick(View view) {
-                               Toast.makeText(getContext(), "item is clicked", Toast.LENGTH_SHORT).show();
+                               Intent intent=new Intent(getActivity(), PersonalChat.class);
+                               intent.putExtra("userNickname",model.getUserNickname());
+                               intent.putExtra("userProfilePIc",model.getUserProfilepic());
+                               intent.putExtra("ReceiverMobileNumber",model.getUserPhonenumber());
+                               intent.putExtra("userUid",auth.getUid());
+                               startActivity(intent);
                            }
                        });
             }
@@ -75,7 +103,7 @@ public class ChatsFragment extends Fragment {
             }
         };
 
-        ChatRecyclerView.setHasFixedSize(true);
+         ChatRecyclerView.setHasFixedSize(true);
         linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         ChatRecyclerView.setLayoutManager(linearLayoutManager);
@@ -112,6 +140,13 @@ public class ChatsFragment extends Fragment {
         if(ChatAdapter!=null){
             ChatAdapter.stopListening();
         }
+    }
+    private void moveToNewActivity () {
+
+        Intent i = new Intent(getActivity(), Contacts.class);
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0, 0);
+
     }
 }
 
