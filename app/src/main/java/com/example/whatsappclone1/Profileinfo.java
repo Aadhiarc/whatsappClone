@@ -1,11 +1,5 @@
 package com.example.whatsappclone1;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -20,11 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.io.File;
@@ -32,7 +30,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.WeakHashMap;
 
 public class Profileinfo extends AppCompatActivity {
     ImageView openCamera;
@@ -43,6 +40,7 @@ public class Profileinfo extends AppCompatActivity {
     private Uri imagePath;
     Uri imageUri;
     int type_check;
+    String status;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -169,6 +167,8 @@ public class Profileinfo extends AppCompatActivity {
         boolean res2 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         return res1 && res2;
     }
+
+
 
     void putData() {
         Intent intent = getIntent();

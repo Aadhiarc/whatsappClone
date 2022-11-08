@@ -1,24 +1,19 @@
 package com.example.whatsappclone1;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.whatsappclone1.Adapters.ViewPagerMessengerAdapter;
 import com.google.android.material.tabs.TabLayout;
@@ -80,4 +75,5 @@ public class Tabbed_layout extends AppCompatActivity {
         super.onBackPressed();
         finishAffinity();
     }
+
 }

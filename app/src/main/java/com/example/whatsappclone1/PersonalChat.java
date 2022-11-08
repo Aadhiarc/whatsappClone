@@ -60,8 +60,6 @@ public class PersonalChat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_chat);
-
-
         mGetMessage=findViewById(R.id.getmessage);
         mSendMessageCardView=findViewById(R.id.Personal_profile_cardview);
         mSendMessageButton=findViewById(R.id.sendMessageBtn);
@@ -84,6 +82,8 @@ public class PersonalChat extends AppCompatActivity {
                 Toast.makeText(PersonalChat.this, "ToolBar", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         auth=FirebaseAuth.getInstance();
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -108,6 +108,7 @@ public class PersonalChat extends AppCompatActivity {
            }
            messagesAdapter.notifyDataSetChanged();
        }
+
 
        @Override
        public void onCancelled(@NonNull DatabaseError error) {

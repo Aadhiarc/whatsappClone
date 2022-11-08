@@ -10,7 +10,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FireStoreDataBASE {
+public class FireStoreDataBASE  {
 
     public static final String USER_NICKNAME = "userNickname";
     public static final String USER_PROFILEPIC = "userProfilepic";
