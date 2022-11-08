@@ -1,14 +1,14 @@
 package com.example.whatsappclone1;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +33,7 @@ public class EditUserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_user_profile);
         auth=FirebaseAuth.getInstance();
         fireStore=FirebaseFirestore.getInstance();
-        userID=auth.getCurrentUser().getUid();
+        userID=auth.getCurrentUser().getPhoneNumber();
         backButton=findViewById(R.id.Edit_back_button);
         userProfileImage=findViewById(R.id.Edit_camera_image_button);
         userName=findViewById(R.id.edit_user_name);

@@ -26,7 +26,7 @@ public class FireStoreDataBASE {
        fireStore= FirebaseFirestore.getInstance();
        auth=FirebaseAuth.getInstance();
         userID =  auth.getCurrentUser().getUid();
-       DocumentReference documentReference=fireStore.collection("AllUsers").document(userID);
+       DocumentReference documentReference=fireStore.collection("AllUsers").document(auth.getCurrentUser().getPhoneNumber());
        Map<String,Object> user=new HashMap<>();
        user.put(USER_NICKNAME,user_name);
        user.put(USER_PROFILEPIC,user_dp);

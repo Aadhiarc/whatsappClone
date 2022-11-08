@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.whatsappclone1.userModel.UserModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -49,15 +49,17 @@ public class Add_new_contacts extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserModel userModel = new UserModel();
-                CollectionReference documentReference = firestore.collection("AllUsers");
+                FirebaseAuth auth=FirebaseAuth.getInstance();
+                  System.out.println(userModel.getUserPhonenumber());
+                DocumentReference documentReference = firestore.collection("AllUsers").document("+91"+userPhoneNumber.getText().toString());
                 Map<String, Object> user = new HashMap<>();
                 user.put(USER_NICKNAME, userNickName.getText().toString());
                 user.put(USER_PROFILEPIC, emptyPerson);
                 user.put(USER_PHONENUMBER, userPhoneNumber.getText().toString());
                 user.put(STATUS, "online");
-                documentReference.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                    public void onSuccess(Void unused) {
 
                     }
                 });

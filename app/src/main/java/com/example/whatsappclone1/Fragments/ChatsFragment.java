@@ -76,12 +76,7 @@ public class ChatsFragment extends Fragment {
                        String uri=model.getUserProfilepic();
                        Picasso.get().load(uri).into(userImageView);
 
-//                       if(model.getStatus().equals("online")){
-//                           holder.userStatus.setText(model.getStatus());
-//                           holder.userStatus.setTextColor(Color.GREEN);
-//                       }else{
-//                           holder.userStatus.setText(model.getStatus());
-//                       }
+
 
                        holder.itemView.setOnClickListener(new View.OnClickListener() {
                            @Override
