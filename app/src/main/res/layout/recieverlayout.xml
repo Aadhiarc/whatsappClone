@@ -11,7 +11,7 @@
          android:background="@drawable/receivermessage"
          android:id="@+id/layoutMessage">
          <TextView
-             android:id="@+id/senderMessage"
+             android:id="@+id/ReciveveMessage"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="Sender Message"
@@ -24,20 +24,12 @@
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/timeofmeassage"
+    android:id="@+id/Recivevetimeofmeassage"
     android:textSize="10sp"
-    android:layout_toRightOf="@id/senderMessage"
+    android:layout_toRightOf="@id/ReciveveMessage"
     android:layout_marginLeft="-40dp"
-    android:layout_alignBottom="@id/senderMessage"
+    android:layout_alignBottom="@id/ReciveveMessage"
     android:text="20:35"
     android:textColor="#434343"/>
-
-
-
-
-
-
-
-
      </RelativeLayout>
 </RelativeLayout>

@@ -43,11 +43,15 @@ public class MessagesAdapter extends RecyclerView.Adapter {
         MessageDb messageDb=messageDbArrayList.get(position);
         if(holder.getClass()==SenderViewHolder.class){
             SenderViewHolder senderViewHolder=(SenderViewHolder) holder;
-            senderViewHolder.textViewMessage.setText(messageDb.getMessage());
+          String msg=messageDb.getMessage();
+          senderViewHolder.textViewMessage.setText(msg);
+
             senderViewHolder.timeOfMessage.setText(messageDb.getCurrenttime());
         }else{
             RecieverViewHolder ViewHolder=(RecieverViewHolder) holder;
-            ViewHolder.textViewMessage.setText(messageDb.getMessage());
+            String rMsg=messageDb.getMessage();
+            System.out.println(rMsg+"ggggg");
+            ViewHolder.textViewMessage.setText(rMsg);
             ViewHolder.timeOfMessage.setText(messageDb.getCurrenttime());
 
         }
@@ -91,8 +95,8 @@ public class MessagesAdapter extends RecyclerView.Adapter {
         public RecieverViewHolder(@NonNull View itemView) {
 
             super(itemView);
-            textViewMessage=itemView.findViewById(R.id.senderMessage);
-            timeOfMessage=itemView.findViewById(R.id.timeofmeassage);
+            textViewMessage=itemView.findViewById(R.id.ReciveveMessage);
+            timeOfMessage=itemView.findViewById(R.id.Recivevetimeofmeassage);
         }
     }
 

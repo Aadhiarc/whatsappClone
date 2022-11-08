@@ -71,7 +71,6 @@ public class PersonalChat extends AppCompatActivity {
         backButtonOfPersonalChat=findViewById(R.id.Personal_chat_back_button);
         messageDbArrayList=new ArrayList<>();
         mRecyclerView=findViewById(R.id.Recyclerviewodpersonalchat);
-
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -115,15 +114,6 @@ public class PersonalChat extends AppCompatActivity {
 
        }
    });
-
-
-
-
-
-
-
-
-
         backButtonOfPersonalChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,14 +152,7 @@ public class PersonalChat extends AppCompatActivity {
                                             });
                                 }
                             });
-
                                 mGetMessage.setText(null);
-
-
-
-
-
-
                 }
             }
         });

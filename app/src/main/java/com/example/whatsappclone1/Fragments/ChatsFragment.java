@@ -75,6 +75,7 @@ public class ChatsFragment extends Fragment {
                        holder.userName.setText(model.getUserNickname());
                        String uri=model.getUserProfilepic();
                        Picasso.get().load(uri).into(userImageView);
+
 //                       if(model.getStatus().equals("online")){
 //                           holder.userStatus.setText(model.getStatus());
 //                           holder.userStatus.setTextColor(Color.GREEN);
@@ -88,7 +89,7 @@ public class ChatsFragment extends Fragment {
                                Intent intent=new Intent(getActivity(), PersonalChat.class);
                                intent.putExtra("userNickname",model.getUserNickname());
                                intent.putExtra("userProfilePIc",model.getUserProfilepic());
-                               intent.putExtra("ReceiverMobileNumber",model.getUserPhonenumber());
+                               intent.putExtra("ReceiverMobileNumber","+91"+model.getUserPhonenumber());
                                intent.putExtra("userUid",auth.getUid());
                                startActivity(intent);
                            }
@@ -108,6 +109,12 @@ public class ChatsFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         ChatRecyclerView.setLayoutManager(linearLayoutManager);
         ChatRecyclerView.setAdapter(ChatAdapter);
+            Contact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    moveToNewActivity();
+                }
+            });
       return v;
 
 
