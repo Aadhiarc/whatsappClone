@@ -5,15 +5,19 @@ public class MessageDb {
     String senderPhoneNumber;
     long timestamp;
     String currenttime;
+    String sentImages;
+
+
 
     public MessageDb() {
     }
 
-    public MessageDb(String message, String senderPhoneNumber, long timestamp, String currenttime) {
+    public MessageDb(String message, String senderPhoneNumber, long timestamp, String currenttime,String sentImages) {
         this.message = message;
         this.senderPhoneNumber = senderPhoneNumber;
         this.timestamp = timestamp;
         this.currenttime = currenttime;
+        this.sentImages=sentImages;
     }
 
     public String getMessage() {
@@ -46,5 +50,12 @@ public class MessageDb {
 
     public void setCurrenttime(String currenttime) {
         this.currenttime = currenttime;
+    }
+    public String getSentImages() {
+        return sentImages;
+    }
+
+    public void setSentImages(String sentImages) {
+        this.sentImages = sentImages;
     }
 }

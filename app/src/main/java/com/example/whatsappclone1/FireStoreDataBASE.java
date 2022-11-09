@@ -1,14 +1,26 @@
 package com.example.whatsappclone1;
 
+import android.content.Context;
+import android.net.Uri;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class FireStoreDataBASE  {
 
@@ -19,13 +31,14 @@ public class FireStoreDataBASE  {
     FirebaseAuth auth;
     FirebaseFirestore fireStore;
     String userID;
-    FirebaseStorage firebaseStorage;
-    StorageReference storageReference;
+    FirebaseStorage storage;
+    String myUrl;
 
     void dataPut(String user_name,String user_dp,String user_mob){
        fireStore= FirebaseFirestore.getInstance();
        auth=FirebaseAuth.getInstance();
         userID =  auth.getCurrentUser().getUid();
+
        DocumentReference documentReference=fireStore.collection("AllUsers").document(auth.getCurrentUser().getPhoneNumber());
        Map<String,Object> user=new HashMap<>();
        user.put(USER_NICKNAME,user_name);
@@ -39,6 +52,56 @@ public class FireStoreDataBASE  {
                System.out.println("successfully");
            }
        });
+
+    }
+
+    void dataPutCloudStorage(Uri image, Context context){
+       storage=FirebaseStorage.getInstance();
+        StorageReference storageReference=storage.getReference("profileImages/"+ UUID.randomUUID()+".png");
+        UploadTask uploadTask=storageReference.putFile(image);
+        uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                Toast.makeText(context, "completed", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+   void senImagesPutCloudStorage(Context context,Uri uri){
+        storage=FirebaseStorage.getInstance();
+        StorageReference storageReference=storage.getReference("SendImages/"+UUID.randomUUID()+".png");
+        UploadTask uploadTask=storageReference.putFile(uri);
+        uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+            }
+        });
+         uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if(!task.isSuccessful()){
+                    throw task.getException();
+                }else{
+                    return storageReference.getDownloadUrl();
+                }
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()){
+                    Uri downloadUrl=task.getResult();
+                    myUrl=downloadUrl.toString();
+                    //to pass the download url to realtime database
+
+                }
+            }
+        });
 
     }
 }

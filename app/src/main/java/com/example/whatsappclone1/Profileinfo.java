@@ -41,7 +41,7 @@ public class Profileinfo extends AppCompatActivity {
     Uri imageUri;
     int type_check;
     String status;
-
+    FireStoreDataBASE fireStoreDataBASE;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class Profileinfo extends AppCompatActivity {
         cardView = findViewById(R.id.profile_cardview);
         userName = findViewById(R.id.profile_name_edit_text);
         next = findViewById(R.id.profileInfo_Btn);
+        fireStoreDataBASE=new FireStoreDataBASE();
         openCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,17 +110,20 @@ public class Profileinfo extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==138&&resultCode==RESULT_OK)
         {
-             type_check=1;
+            type_check=1;
             imagePath=data.getData();
+            //to store image in cloud storage
+            fireStoreDataBASE.dataPutCloudStorage(imagePath,this);
             openCamera.setImageURI(imagePath);
         }else if(requestCode==100&&resultCode==RESULT_OK){
-             type_check=2;
+            type_check=2;
             profilePhoto=(Bitmap)data.getExtras().get("data");
-             //to convert image quality
+            //to convert image quality
             WeakReference<Bitmap> result1=new WeakReference<>(Bitmap.createScaledBitmap(profilePhoto,profilePhoto.getHeight(),profilePhoto.getWidth(),false)
                     .copy(Bitmap.Config.RGB_565,true));
             Bitmap bm=result1.get();
             imageUri=saveImage(bm,Profileinfo.this);
+            fireStoreDataBASE.dataPutCloudStorage(imageUri,this);
             openCamera.setImageURI(imageUri);
         }
 

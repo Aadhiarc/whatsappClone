@@ -1,18 +1,15 @@
 package com.example.whatsappclone1.Fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.whatsappclone1.R;
-import com.example.whatsappclone1.Tabbed_layout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -42,11 +39,7 @@ public class StatusFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //Load animation
-         slide_down = AnimationUtils.loadAnimation(getActivity(),
-                R.anim.slide_down);
 
-         slide_up = AnimationUtils.loadAnimation(getActivity(),
-                R.anim.slide_up);
 
 
     }
