@@ -280,6 +280,7 @@ public class PersonalChat extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+
         mRecyclerView.setAdapter(messagesAdapter);
         messagesAdapter.notifyDataSetChanged();
     }
