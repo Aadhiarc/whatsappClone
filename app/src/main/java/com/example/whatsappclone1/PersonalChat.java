@@ -65,7 +65,7 @@ public class PersonalChat extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase firebaseDatabase;
     String senderRoom,recieverRoom;
-    ImageButton backButtonOfPersonalChat;
+    ImageButton backButtonOfPersonalChat,videoCall;
     RecyclerView mRecyclerView;
     String CurrentTime;
     Calendar calendar;
@@ -75,7 +75,7 @@ public class PersonalChat extends AppCompatActivity {
     FireStoreDataBASE fireStoreDataBASE;
     Bitmap cameraPhoto;
     Uri imageUri;
-    String sentImages;
+    String mUserProfilePic;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +92,7 @@ public class PersonalChat extends AppCompatActivity {
         mTextViewOfSpecificUser=findViewById(R.id.specificUserName);
         mImageViewOfSpecificUser=findViewById(R.id.Personal_chat_camera_image_button);
         backButtonOfPersonalChat=findViewById(R.id.Personal_chat_back_button);
+        videoCall=findViewById(R.id.videoCallBtn);
         messageDbArrayList=new ArrayList<>();
         mRecyclerView=findViewById(R.id.Recyclerviewodpersonalchat);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
@@ -147,7 +148,8 @@ public class PersonalChat extends AppCompatActivity {
             }
         });
         mTextViewOfSpecificUser.setText(mRecieverName);
-        Picasso.get().load(getIntent().getStringExtra("userProfilePIc")).into(mImageViewOfSpecificUser);
+        mUserProfilePic=getIntent().getStringExtra("userProfilePIc");
+        Picasso.get().load(mUserProfilePic).into(mImageViewOfSpecificUser);
         mSendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,7 +224,17 @@ public class PersonalChat extends AppCompatActivity {
                 startActivityForResult(open,100);
             }
         });
-
+         //video call button
+        videoCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(PersonalChat.this,outGoingVideoCall.class);
+                intent.putExtra("recieverName",mRecieverName);
+                intent.putExtra("receiverPhoneNumber",mReceiverPhoneNumber);
+                intent.putExtra("reciverProfilePic",mUserProfilePic);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
