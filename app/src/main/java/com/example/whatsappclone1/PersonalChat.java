@@ -66,7 +66,6 @@ public class PersonalChat extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     String senderRoom,recieverRoom;
     ImageButton backButtonOfPersonalChat;
-
     RecyclerView mRecyclerView;
     String CurrentTime;
     Calendar calendar;
@@ -98,16 +97,16 @@ public class PersonalChat extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        messagesAdapter=new MessagesAdapter(PersonalChat.this,messageDbArrayList);
-        mRecyclerView.setAdapter(messagesAdapter);
-        fireStoreDataBASE=new FireStoreDataBASE();
+        messagesAdapter=new MessagesAdapter(this,messageDbArrayList);
 
+        fireStoreDataBASE=new FireStoreDataBASE();
         intent=getIntent();
         mPersonalChatToolBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(PersonalChat.this, "ToolBar", Toast.LENGTH_SHORT).show();
             }
+
         });
 
 
@@ -116,7 +115,6 @@ public class PersonalChat extends AppCompatActivity {
         firebaseDatabase=FirebaseDatabase.getInstance();
         calendar=Calendar.getInstance();
         simpleDateFormat=new SimpleDateFormat("hh:mm a");
-
         mSenderPhoneNumber=auth.getCurrentUser().getPhoneNumber();
         mReceiverPhoneNumber=getIntent().getStringExtra("ReceiverMobileNumber");
         mRecieverName=getIntent().getStringExtra("userNickname");
@@ -154,10 +152,10 @@ public class PersonalChat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 enteredMessage=mGetMessage.getText().toString();
-//                if(enteredMessage.isEmpty()){
-//                    Toast.makeText(PersonalChat.this, "Message is empty", Toast.LENGTH_SHORT).show();
-//                }
-
+                if(enteredMessage.isEmpty()){
+                    Toast.makeText(PersonalChat.this, "Message is empty", Toast.LENGTH_SHORT).show();
+                }
+                else{
                     Date date=new Date();
                     CurrentTime=simpleDateFormat.format(calendar.getTime());
                     //to send images to chat history
@@ -182,8 +180,8 @@ public class PersonalChat extends AppCompatActivity {
                                             });
                                 }
                             });
-                                mGetMessage.setText(null);
-
+                    mGetMessage.setText(null);
+                }
             }
         });
 
@@ -243,10 +241,10 @@ public class PersonalChat extends AppCompatActivity {
             type_check=2;
             cameraPhoto=(Bitmap)data.getExtras().get("data");
             //to convert image quality
-            WeakReference<Bitmap> result1=new WeakReference<>(Bitmap.createScaledBitmap(cameraPhoto,cameraPhoto.getHeight(),cameraPhoto.getWidth(),false)
+            WeakReference<Bitmap> result1=new WeakReference<>(Bitmap.createScaledBitmap(cameraPhoto,800,800,false)
                     .copy(Bitmap.Config.RGB_565,true));
             Bitmap bm=result1.get();
-            imageUri=saveImage(bm,this);
+           imageUri=saveImage(bm,this);
             fireStoreDataBASE.senImagesPutCloudStorage(this,imageUri);
             mSendMessageButton.performClick();
 
@@ -282,6 +280,7 @@ public class PersonalChat extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        mRecyclerView.setAdapter(messagesAdapter);
         messagesAdapter.notifyDataSetChanged();
     }
 

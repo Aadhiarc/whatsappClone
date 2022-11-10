@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/personal_chat"
@@ -13,12 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/dark_green"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:titleTextColor="@color/white">
+        app:titleTextColor="@color/white"
+        android:layout_alignParentTop="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -66,81 +62,86 @@
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Recyclerviewodpersonalchat"
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@id/getmessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Personal_chat_toolbar"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/Personal_chat_toolbar"
+        android:id="@+id/editTextConstrainLayout">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Recyclerviewodpersonalchat"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            app:layout_constraintBottom_toTopOf="@id/getmessage"
+            android:padding="5dp"></androidx.recyclerview.widget.RecyclerView>
+        <EditText
+            android:id="@+id/getmessage"
+            android:layout_width="320dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="55dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/sendmessage_backgroung"
+            android:hint="Type a message"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></EditText>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sendMessageBtn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="6dp"
+            android:scaleType="fitCenter"
+            android:backgroundTint="@color/dark_green"
+            android:src="@drawable/ic_send_message"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/getmessage"
+            app:layout_constraintStart_toEndOf="@+id/getmessage" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/CameraBtn_personal_chat"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="6dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            android:backgroundTint="@color/dark_green"
+            android:src="@drawable/ic_baseline_photo_camera_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/sendMessageBtn"
+            app:layout_constraintLeft_toRightOf="@id/getmessage"
+            app:layout_constraintStart_toEndOf="@+id/getmessage" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/GalleryBtn_personal_chat"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:backgroundTint="@color/dark_green"
+            android:src="@drawable/ic_gallery"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/CameraBtn_personal_chat"
+            app:layout_constraintLeft_toRightOf="@id/getmessage"
+            app:layout_constraintStart_toEndOf="@+id/getmessage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/getmessage"
-        android:layout_width="320dp"
-        android:layout_height="55dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="55dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/sendmessage_backgroung"
-        android:hint="Type a message"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></EditText>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/sendMessageBtn"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="6dp"
-        android:scaleType="fitCenter"
-        android:backgroundTint="@color/dark_green"
-        android:src="@drawable/ic_send_message"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/getmessage"
-        app:layout_constraintStart_toEndOf="@+id/getmessage" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/CameraBtn_personal_chat"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="6dp"
-        android:scaleType="fitCenter"
-        android:visibility="invisible"
-        android:clickable="true"
-        android:focusable="true"
-        android:backgroundTint="@color/dark_green"
-        android:src="@drawable/ic_baseline_photo_camera_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/sendMessageBtn"
-        app:layout_constraintLeft_toRightOf="@id/getmessage"
-        app:layout_constraintStart_toEndOf="@+id/getmessage" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/GalleryBtn_personal_chat"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="6dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:scaleType="fitCenter"
-        android:visibility="invisible"
-        android:backgroundTint="@color/dark_green"
-        android:src="@drawable/ic_gallery"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/CameraBtn_personal_chat"
-        app:layout_constraintLeft_toRightOf="@id/getmessage"
-        app:layout_constraintStart_toEndOf="@+id/getmessage" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone1.userModel.MessageDb;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,14 +47,15 @@ public class MessagesAdapter extends RecyclerView.Adapter {
             SenderViewHolder senderViewHolder=(SenderViewHolder) holder;
           String msg=messageDb.getMessage();
           senderViewHolder.textViewMessage.setText(msg);
-
             senderViewHolder.timeOfMessage.setText(messageDb.getCurrenttime());
+            Picasso.get().load(messageDb.getSentImages()).into(senderViewHolder.sentImage);
         }else{
             RecieverViewHolder ViewHolder=(RecieverViewHolder) holder;
             String rMsg=messageDb.getMessage();
             System.out.println(rMsg+"ggggg");
             ViewHolder.textViewMessage.setText(rMsg);
             ViewHolder.timeOfMessage.setText(messageDb.getCurrenttime());
+            Picasso.get().load(messageDb.getSentImages()).into(ViewHolder.recievedImage);
 
         }
 
@@ -80,23 +83,25 @@ public class MessagesAdapter extends RecyclerView.Adapter {
     class SenderViewHolder extends RecyclerView.ViewHolder {
         TextView textViewMessage;
         TextView timeOfMessage;
-
+        ImageView sentImage;
         public SenderViewHolder(@NonNull View itemView) {
 
             super(itemView);
             textViewMessage=itemView.findViewById(R.id.senderMessage);
             timeOfMessage=itemView.findViewById(R.id.timeofmeassage);
+            sentImage=itemView.findViewById(R.id.senderChatSentImages);
         }
     }
     class RecieverViewHolder extends RecyclerView.ViewHolder {
         TextView textViewMessage;
         TextView timeOfMessage;
-
+        ImageView recievedImage;
         public RecieverViewHolder(@NonNull View itemView) {
 
             super(itemView);
             textViewMessage=itemView.findViewById(R.id.ReciveveMessage);
             timeOfMessage=itemView.findViewById(R.id.Recivevetimeofmeassage);
+            recievedImage=itemView.findViewById(R.id.recieverChatSentImages);
         }
     }
 
