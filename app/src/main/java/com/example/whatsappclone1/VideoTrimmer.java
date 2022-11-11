@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.VideoView;
@@ -50,10 +51,12 @@ public class VideoTrimmer extends AppCompatActivity {
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Intent intent=new Intent();
-                        intent.setAction(Intent.ACTION_PICK);
-                        intent.setType("video/**");
-                        startForResult.launch(intent);
+                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+
+//                        intent.setType("video/*");
+//                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                       startForResult.launch(intent);
+
 
 
                     }
@@ -87,14 +90,22 @@ public class VideoTrimmer extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK &&
                             result.getData() != null) {
-                        Intent intent=result.getData();
-                        Uri uri = intent.getData();
-                        trimVideo(uri);
+                       Intent empty= result.getData();
+                          trimVideo(empty.getData());
+                        Uri uri = Uri.parse(TrimVideo.getTrimmedVideoPath(result.getData()));
+                        showVideo(uri);
 
                     } else
                         LogMessage.v("videoTrimResultLauncher data is null");
                 });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     void showVideo(Uri trimmedVideo){
         views.setVideoURI(trimmedVideo);
         views.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
