@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -77,6 +78,7 @@ public class VideoTrimmer extends AppCompatActivity {
                 .setTrimType(TrimType.FIXED_DURATION)
                 .setFixedDuration(30)
                 .start(this,startForResult);
+
     }
 
     void forResult(){
@@ -93,4 +95,20 @@ public class VideoTrimmer extends AppCompatActivity {
                         LogMessage.v("videoTrimResultLauncher data is null");
                 });
     }
+    void showVideo(Uri trimmedVideo){
+        views.setVideoURI(trimmedVideo);
+        views.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.start();
+            }
+        });
+        views.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.start();
+            }
+        });
+    }
+
 }
