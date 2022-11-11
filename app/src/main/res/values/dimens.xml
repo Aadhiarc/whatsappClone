@@ -14,5 +14,6 @@
     <!--phoneNumberVerify page -->
     <dimen name="phoneNumber_verifyPage_verifyBtn_width">100dp</dimen>
     <dimen name="phoneNumber_verifyPage_editText_width">200dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

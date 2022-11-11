@@ -88,7 +88,9 @@ public class FireStoreDataBASE  {
                 if(!task.isSuccessful()){
                     throw task.getException();
                 }else{
+                    System.out.println(storageReference.getDownloadUrl()+"sasa");
                     return storageReference.getDownloadUrl();
+
                 }
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -97,7 +99,7 @@ public class FireStoreDataBASE  {
                 if(task.isSuccessful()){
                     Uri downloadUrl=task.getResult();
                     myUrl=downloadUrl.toString();
-                    //to pass the download url to realtime database
+
 
                 }
             }
