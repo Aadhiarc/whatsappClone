@@ -3,7 +3,9 @@ package com.example.whatsappclone1;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
 import com.gowtham.library.utils.LogMessage;
 import com.gowtham.library.utils.TrimType;
 import com.gowtham.library.utils.TrimVideo;
@@ -28,8 +32,11 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 public class VideoTrimmer extends AppCompatActivity {
     VideoView views;
-    Button button;
+    Button button,record,upload;
     ActivityResultLauncher<Intent> startForResult;
+    FirebaseAuth auth;
+    FirebaseStorage storage;
+    FireStoreDataBASE fireStoreDataBASE;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +44,32 @@ public class VideoTrimmer extends AppCompatActivity {
         setContentView(R.layout.activity_video_trimmer);
         views=findViewById(R.id.videosView);
         button=findViewById(R.id.selectVideoBtn);
-        forResult();
+        record=findViewById(R.id.record);
+        upload=findViewById(R.id.uploadVideo);
+        fireStoreDataBASE=new FireStoreDataBASE();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 checkPermission();
             }
         });
-       }
+        forResult();
+        record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                startForResult.launch(intent);
+            }
+        });
+    }
     private void checkPermission(){
         Dexter.withContext(this).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
-
-//                        intent.setType("video/*");
-//                        intent.setAction(Intent.ACTION_GET_CONTENT);
-                       startForResult.launch(intent);
-
-
-
+                        Intent intent=new Intent(Intent.ACTION_PICK);
+                        intent.setType("video/*");
+                        startForResult.launch(intent);
                     }
 
                     @Override
@@ -90,21 +101,23 @@ public class VideoTrimmer extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK &&
                             result.getData() != null) {
-                       Intent empty= result.getData();
-                          trimVideo(empty.getData());
-                        Uri uri = Uri.parse(TrimVideo.getTrimmedVideoPath(result.getData()));
-                        showVideo(uri);
+                        Intent empty=result.getData();
+                        showVideo(Uri.parse(getRealPathFromURI(this,empty.getData())));
+                        upload.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                storage= FirebaseStorage.getInstance();
+                                auth= FirebaseAuth.getInstance();
+                               fireStoreDataBASE.sentWhatsAppStatusPutCloudStorage(VideoTrimmer.this,empty.getData());
+                            }
+                        });
 
                     } else
                         LogMessage.v("videoTrimResultLauncher data is null");
                 });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-    }
 
     void showVideo(Uri trimmedVideo){
         views.setVideoURI(trimmedVideo);
@@ -121,5 +134,21 @@ public class VideoTrimmer extends AppCompatActivity {
             }
         });
     }
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            System.out.println(cursor.getString(column_index)+"path");
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
 
 }

@@ -106,4 +106,48 @@ public class FireStoreDataBASE  {
         });
 
     }
+
+
+    void sentWhatsAppStatusPutCloudStorage(Context context,Uri uri){
+        storage=FirebaseStorage.getInstance();
+        auth=FirebaseAuth.getInstance();
+        StorageReference storageReference=storage.getReference("WhatsAppStatus/"+auth.getCurrentUser().getPhoneNumber()+".mp4");
+        UploadTask uploadTask=storageReference.putFile(uri);
+        uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if(!task.isSuccessful()){
+                    throw task.getException();
+                }else{
+                    System.out.println(storageReference.getDownloadUrl()+"sasa");
+                    return storageReference.getDownloadUrl();
+
+                }
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()){
+                    Uri downloadUrl=task.getResult();
+                    myUrl=downloadUrl.toString();
+
+
+                }
+            }
+        });
+
+    }
+
+
 }
