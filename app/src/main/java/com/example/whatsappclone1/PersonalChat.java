@@ -1,6 +1,7 @@
 package com.example.whatsappclone1;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -46,7 +48,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class PersonalChat extends AppCompatActivity {
-
+      String agoraId="1059441aeabf422198c2b53c81114936";
     EditText mGetMessage;
     FloatingActionButton mSendMessageButton,mCameraBtn,mGalleryBtn;
     Animation fab_up,fab_down;
@@ -65,7 +67,7 @@ public class PersonalChat extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase firebaseDatabase;
     String senderRoom,recieverRoom;
-    ImageButton backButtonOfPersonalChat,videoCall;
+    ImageButton backButtonOfPersonalChat,videoCall,voiceCall;
     RecyclerView mRecyclerView;
     String CurrentTime;
     Calendar calendar;
@@ -93,6 +95,7 @@ public class PersonalChat extends AppCompatActivity {
         mImageViewOfSpecificUser=findViewById(R.id.Personal_chat_camera_image_button);
         backButtonOfPersonalChat=findViewById(R.id.Personal_chat_back_button);
         videoCall=findViewById(R.id.videoCallBtn);
+        voiceCall=findViewById(R.id.CallBtn);
         messageDbArrayList=new ArrayList<>();
         mRecyclerView=findViewById(R.id.Recyclerviewodpersonalchat);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
@@ -228,13 +231,57 @@ public class PersonalChat extends AppCompatActivity {
         videoCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(PersonalChat.this,outGoingVideoCall.class);
-                intent.putExtra("recieverName",mRecieverName);
-                intent.putExtra("receiverPhoneNumber",mReceiverPhoneNumber);
-                intent.putExtra("reciverProfilePic",mUserProfilePic);
-                startActivity(intent);
+                Dialog dialog = new Dialog(PersonalChat.this);
+                dialog.setContentView(R.layout.dialogbox_videocall);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.show();
+                TextView Cancel=dialog.findViewById(R.id.cancelBtnVideo);
+                TextView Call=dialog.findViewById(R.id.callBtnVideo);
+                Cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                Call.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent1=new Intent(PersonalChat.this,outGoingVideoCall.class);
+                        intent1.putExtra("recieverName",mRecieverName);
+                        intent1.putExtra("receiverPhoneNumber",mReceiverPhoneNumber);
+                        intent1.putExtra("reciverProfilePic",mUserProfilePic);
+                        startActivity(intent1);
+                    }
+                });
             }
         });
+        voiceCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(PersonalChat.this);
+                dialog.setContentView(R.layout.dialogbox_call);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.show();
+                TextView Cancel=dialog.findViewById(R.id.cancelBtnVideo);
+                TextView Call=dialog.findViewById(R.id.callBtnVideo);
+                Cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                Call.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println(mReceiverPhoneNumber);
+                        Uri u = Uri.parse("tel:" + mReceiverPhoneNumber);
+                        Intent i = new Intent(Intent.ACTION_DIAL, u);
+                        startActivity(i);
+                    }
+                });
+            }
+        });
+
     }
 
     @Override

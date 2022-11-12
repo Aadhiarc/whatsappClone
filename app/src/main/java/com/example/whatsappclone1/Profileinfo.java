@@ -84,6 +84,7 @@ public class Profileinfo extends AppCompatActivity {
         dialog.setContentView(R.layout.cameraallerydialog);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show();
+
         ShapeableImageView camera= dialog.findViewById(R.id.camera_button);
         ShapeableImageView gallery=dialog.findViewById(R.id.gallery_button);
         camera.setOnClickListener(new View.OnClickListener() {
