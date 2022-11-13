@@ -22,4 +22,11 @@
         android:clickable="true"
         android:layout_marginBottom="10dp"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        android:id="@+id/contactRecyclerView"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
