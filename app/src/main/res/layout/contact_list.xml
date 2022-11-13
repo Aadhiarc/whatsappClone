@@ -1,49 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/relativeLayout2"
+    android:id="@+id/contactRelativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    >
 
+      <RelativeLayout
+          android:layout_width="350dp"
+          android:layout_height="wrap_content"
+          android:padding="10dp">
+          <androidx.cardview.widget.CardView
+              android:layout_width="60dp"
+              android:layout_height="60dp"
+              app:cardCornerRadius="60dp"
+              android:id="@+id/contactCardView">
 
-    <ImageView
-        android:id="@+id/iv_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_person"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@id/iv_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_name"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_number"
-            android:textSize="14sp"/>
+              <ImageView
+                  android:id="@+id/iv_image"
+                  android:layout_width="60dp"
+                  android:layout_height="60dp"
+                  android:layout_gravity="center"
+                  android:scaleType="centerInside"
+                  android:src="@drawable/ic_person"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+          </androidx.cardview.widget.CardView>
 
-        
-        
-        
-        
-        
-    </LinearLayout>
+          <TextView
+              android:id="@+id/tv_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="0dp"
+              android:layout_toRightOf="@id/contactCardView"
+              android:paddingTop="8dp"
+              android:paddingBottom="8dp"
+              android:text="userName"
+              android:layout_marginStart="10dp"
+              android:textColor="@color/black"
+              android:textSize="18sp"
+              android:textStyle="bold" />
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/tv_number"
+              android:text="phoneNumber"
+              android:textSize="14sp"
+              android:layout_toRightOf="@id/contactCardView"
+              android:layout_below="@id/tv_name"
+              android:layout_marginStart="10dp"/>
+      </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+     <ImageButton
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@drawable/ic_baseline_call_green"
+         android:layout_gravity="center"
+         android:background="@android:color/transparent"
+         android:id="@+id/contactCallButton"/>
+
+</LinearLayout>

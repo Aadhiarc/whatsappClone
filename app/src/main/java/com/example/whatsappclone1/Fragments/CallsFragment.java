@@ -10,6 +10,7 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class CallsFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<ContactModel>arrayList=new ArrayList<ContactModel>();
     MainAdapter adapter;
+    RelativeLayout relativeLayout;
 
     public CallsFragment() {
 
@@ -45,6 +47,7 @@ public class CallsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter=new MainAdapter(getActivity(),arrayList);
         recyclerView.setAdapter(adapter);
+
         return view;
     }
 
