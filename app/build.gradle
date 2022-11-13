@@ -58,7 +58,9 @@ dependencies {
     implementation 'com.github.a914-gowtham:android-video-trimmer:1.7.3'
     //checking permission
     implementation 'com.karumi:dexter:6.2.3'
-    //agora uikit for video calling
+    //for video compressing
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.4'
+    implementation 'com.googlecode.mp4parser:isoparser:1.1.22'
 
 
 }

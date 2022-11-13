@@ -3,12 +3,16 @@ package com.example.whatsappclone1;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +27,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.gowtham.library.utils.LogMessage;
 import com.gowtham.library.utils.TrimType;
 import com.gowtham.library.utils.TrimVideo;
+import com.iceteck.silicompressorr.SiliCompressor;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+
+import java.io.File;
+import java.net.URISyntaxException;
 
 public class VideoTrimmer extends AppCompatActivity {
     VideoView views;
@@ -37,6 +45,7 @@ public class VideoTrimmer extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseStorage storage;
     FireStoreDataBASE fireStoreDataBASE;
+    Uri CompressedUri;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +78,7 @@ public class VideoTrimmer extends AppCompatActivity {
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                         Intent intent=new Intent(Intent.ACTION_PICK);
                         intent.setType("video/*");
+
                         startForResult.launch(intent);
                     }
 
@@ -108,7 +118,13 @@ public class VideoTrimmer extends AppCompatActivity {
                             public void onClick(View v) {
                                 storage= FirebaseStorage.getInstance();
                                 auth= FirebaseAuth.getInstance();
-                               fireStoreDataBASE.sentWhatsAppStatusPutCloudStorage(VideoTrimmer.this,empty.getData());
+                                Uri uri=empty.getData();
+                                //compress video
+                                File file=new File(Environment.getExternalStorageDirectory().getAbsolutePath());
+                                //compress video method
+                               new CompressVideo().execute(uri.toString(),file.getPath());
+                                fireStoreDataBASE.sentWhatsAppStatusPutCloudStorage(VideoTrimmer.this,CompressedUri);
+                               startActivity(new Intent(VideoTrimmer.this,Tabbed_layout.class));
                             }
                         });
 
@@ -117,9 +133,56 @@ public class VideoTrimmer extends AppCompatActivity {
                 });
     }
 
+    private class CompressVideo
+            extends AsyncTask<String, String, String> {
+
+        // Initialize dialog
+        Dialog dialog;
+
+        @Override protected void onPreExecute()
+        {
+            super.onPreExecute();
+            // Display dialog
+            dialog = ProgressDialog.show(
+                    VideoTrimmer.this, "", "Compressing...");
+        }
+
+        @Override
+        protected String doInBackground(String... strings)
+        {
+            // Initialize video path
+            String videoPath = null;
+
+            try {
+                // Initialize uri
+                Uri uri = Uri.parse(strings[1]);
+                // Compress video
+                videoPath
+                        = SiliCompressor.with(VideoTrimmer.this)
+                        .compressVideo(uri, strings[2]);
+            }
+            catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            // Return Video path
+            return videoPath;
+        }
+
+        @Override protected void onPostExecute(String s)
+        {
+            super.onPostExecute(s);
+            // Dismiss dialog
+            dialog.dismiss();
+            // Initialize file
+            File file = new File(s);
+            // Initialize uri
+            CompressedUri= Uri.fromFile(file);
+
+        }
+    }
 
 
-    void showVideo(Uri trimmedVideo){
+        void showVideo(Uri trimmedVideo){
         views.setVideoURI(trimmedVideo);
         views.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
