@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,12 +76,12 @@ public class ChatsFragment extends Fragment {
                        String uri=model.getUserProfilepic();
                        Picasso.get().load(uri).into(userImageView);
 
-                       if(model.getStatus().equals("online")){
-                           holder.userStatus.setText(model.getStatus());
-                           holder.userStatus.setTextColor(Color.GREEN);
-                       }else{
-                           holder.userStatus.setText(model.getStatus());
-                       }
+//                       if(model.getStatus().equals("online")){
+//                           holder.userStatus.setText(model.getStatus());
+//                           holder.userStatus.setTextColor(Color.GREEN);
+//                       }else{
+//                           holder.userStatus.setText(model.getStatus());
+//                       }
 
                        holder.itemView.setOnClickListener(new View.OnClickListener() {
                            @Override

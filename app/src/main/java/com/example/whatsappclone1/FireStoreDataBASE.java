@@ -185,6 +185,26 @@ public class FireStoreDataBASE  {
     }
 
 
+  //to change new number
+  void dataPutNewName(String user_name,String user_dp,String user_mob){
+      fireStore= FirebaseFirestore.getInstance();
+      auth=FirebaseAuth.getInstance();
+      userID =  auth.getCurrentUser().getUid();
+      DocumentReference documentReference=fireStore.collection("AllUsers").document(auth.getCurrentUser().getPhoneNumber());
+      Map<String,Object> user=new HashMap<>();
+      user.put(USER_NICKNAME,user_name);
+      user.put(USER_PROFILEPIC,user_dp);
+      user.put(USER_PHONENUMBER,user_mob);
+      user.put(STATUS,"online");
+      documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+          @Override
+
+          public void onSuccess(Void unused) {
+              System.out.println("successfully");
+          }
+      });
+
+  }
 
 
 

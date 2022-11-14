@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -55,7 +56,20 @@ public class StatusFragment extends Fragment {
            moveToCamera();
             }
         });
+        setupOnBackPressed();
         return view;
+    }
+
+    private void setupOnBackPressed() {
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(isEnabled()){
+                    setEnabled(false);
+                    requireActivity().onBackPressed();
+                }
+            }
+        });
     }
 
     @Override
@@ -75,4 +89,5 @@ public class StatusFragment extends Fragment {
         ((Activity) getActivity()).overridePendingTransition(0, 0);
 
     }
+
 }

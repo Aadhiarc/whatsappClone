@@ -20,6 +20,8 @@ public class MessageDb {
         this.sentImages=sentImages;
     }
 
+
+
     public String getMessage() {
         return message;
     }
