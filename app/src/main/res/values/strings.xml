@@ -29,14 +29,44 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_video_trimmer">VideoTrimmer</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_group_template">group_template</string>
+    <string name="Add_new_contact_header">Add new Contacts to Firebase</string>
+    <!--add new contact page -->
+    <string name="add_new_contact_name_hint">Name</string>
+    <string name="add_new_contact_phone_hint">Phone</string>
+
+    <!--change number page -->
+    <string name="change_number_toolbar_title">Change number</string>
+    <string name="change_number_first_header">Enter your old phone number:</string>
+    <string name="change_number_old_number_hint">phone number</string>
+    <string name="change_number_second_hint">Enter your new phone number:</string>
+    <string name="change_number_new_number_hint">phone number</string>
+    <string name="change_number_confirm_button_text">CONFIRM</string>
+    <!--contacts -->
+    <string name="add_new_contacts_toolbar_title">Add new Contacts</string>
+    <string name="add_new_contact_layout_text">New contact</string>
+    <!--edit user profile -->
+    <string name="user_profile_toolbar_title">Profile</string>
+    <string name="user_profile_name_tag">Name</string>
+    <string name="user_profile_name_tag_hint">User Name</string>
+    <string name="user_profile_phone_tag">Phone</string>
+    <string name="user_profile_phone_tag_hint">User Phonenumber</string>
+    <!--personal chat page -->
+    <string name="personal_chat_toolbar_title">userName</string>
+    <!--profileinfo page -->
+    <string name="profile_info_header">Profile info</string>
+    <string name="profileinfo_header2">photo</string>
+    <string name="profileinfo_button_text">NEXT</string>
+    <!--splashScreen page -->
+    <string name="splashscreen_heading">Welcome to whatsapp</string>
+    <!--tabbed page -->
+    <string name="tabbedLayout_toolbar_title">WhatsApp</string>
+    <string name="settings_page_toolbar_title">Settings</string>
+    <!--settings page -->
+    <string name="settings_page_user_name_tag">user name</string>
+    <string name="settings_page_tag_hint_text">Hey there! I am using WhatsApp.</string>
+    <string name="personal_chat_edit_text_hint">Enter your message</string>
 </resources>

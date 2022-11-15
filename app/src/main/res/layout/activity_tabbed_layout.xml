@@ -11,7 +11,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/dark_green"
         app:titleTextColor="@color/white"
-        app:title="WhatsApp"
+        app:title="@string/tabbedLayout_toolbar_title"
         app:layout_constraintBottom_toTopOf="@+id/tab_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

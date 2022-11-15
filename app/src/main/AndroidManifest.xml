@@ -27,13 +27,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".custom_dialog_userName_edit"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".OpenCamera"
             android:exported="false">
             <meta-data

@@ -36,28 +36,28 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="83dp"
                 android:layout_toRightOf="@id/Personal_profile_cardview"
-                android:text="userName"
+                android:text="@string/personal_chat_toolbar_title"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/personal_chat_toolbar_textsize" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/Personal_profile_cardview"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="@dimen/personal_chat_cardview_width"
+                android:layout_height="@dimen/personal_chat_cardview_height"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_toRightOf="@id/Personal_chat_back_button"
                 android:clickable="true"
-                app:cardCornerRadius="35dp">
+                app:cardCornerRadius="@dimen/personal_chat_cardview_radius">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/Personal_chat_camera_image_button"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/personal_chat_imageview_width"
+                    android:layout_height="@dimen/personal_chat_image_view_height"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_person"></com.google.android.material.imageview.ShapeableImageView>
+                    android:src="@drawable/ic_person" />
             </androidx.cardview.widget.CardView>
 
             <ImageButton
@@ -90,32 +90,32 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Recyclerviewodpersonalchat"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="@dimen/persoanal_chat_recyclerview_height"
             android:padding="5dp"
             app:layout_constraintBottom_toTopOf="@id/getmessage"
-            tools:layout_editor_absoluteX="-101dp"></androidx.recyclerview.widget.RecyclerView>
+            tools:layout_editor_absoluteX="-101dp" />
 
         <EditText
             android:id="@+id/getmessage"
-            android:layout_width="320dp"
-            android:layout_height="55dp"
+            android:layout_width="@dimen/personal_chat_edittext_width"
+            android:layout_height="@dimen/personal_chat_edittext_height"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="55dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/sendmessage_backgroung"
-            android:hint="Type a message"
+            android:hint="@string/personal_chat_edit_text_hint"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"></EditText>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/sendMessageBtn"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="@dimen/personal_chat_sendBtn_width"
+            android:layout_height="@dimen/personal_chat_sendBtn_height"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="6dp"
             android:scaleType="fitCenter"
@@ -127,8 +127,8 @@
             app:layout_constraintStart_toEndOf="@+id/getmessage" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/CameraBtn_personal_chat"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="@dimen/personal_chat_imageBtn_width"
+            android:layout_height="@dimen/personal_chat_imageBtn_height"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="6dp"
             android:scaleType="fitCenter"
@@ -144,8 +144,8 @@
             app:layout_constraintStart_toEndOf="@+id/getmessage" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/GalleryBtn_personal_chat"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="@dimen/personal_chat_galleryBtn_width"
+            android:layout_height="@dimen/personal_chat_galleryBtn_height"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="6dp"
             android:clickable="true"

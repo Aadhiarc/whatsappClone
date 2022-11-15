@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
-            android:text="Profile info"
+            android:text="@string/profile_info_header"
             android:textColor="@color/dark_green"
             android:textSize="20sp" />
     </LinearLayout>
@@ -37,25 +37,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="photo" />
+            android:text="@string/profileinfo_header2" />
 <Space
     android:layout_width="match_parent"
     android:layout_height="30dp"/>
         <androidx.cardview.widget.CardView
             android:id="@+id/profile_cardview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/profileinfo_cardview_width"
+            android:layout_height="@dimen/profileinfo_cardview_height"
             android:layout_gravity="center"
             android:clickable="true"
-            app:cardCornerRadius="100dp">
+            app:cardCornerRadius="@dimen/profileinfo_cardview_radius">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/camera_image_button"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/profileinfo_imageview_width"
+                android:layout_height="@dimen/profileinfo_imageview_height"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_person"></com.google.android.material.imageview.ShapeableImageView>
+                android:src="@drawable/ic_person" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 <Space
@@ -66,8 +66,8 @@
     tools:ignore="MissingConstraints" />
     <EditText
         android:id="@+id/profile_name_edit_text"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/profileinfo_edittext_width"
+        android:layout_height="@dimen/profileinfo_edittext_height"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -76,10 +76,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profileInfo_Btn"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/profileinfo_button_width"
+        android:layout_height="@dimen/profileinfo_button_height"
         android:background="@color/light_green"
-        android:text="NEXT"
+        android:text="@string/profileinfo_button_text"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textStyle="bold"

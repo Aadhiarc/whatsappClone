@@ -30,11 +30,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Settings"
+                android:text="@string/settings_page_toolbar_title"
                 android:textColor="@color/white"
                 android:layout_toRightOf="@id/Settings_back_button"
                 android:layout_marginStart="10dp"
-                android:textSize="20sp"/>
+                android:textSize="@dimen/settings_page_toolbar_textsize"/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
     <RelativeLayout
@@ -48,42 +48,39 @@
         >
         <androidx.cardview.widget.CardView
             android:id="@+id/Settings_profile_cardview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/settings_page_cardview_width"
+            android:layout_height="@dimen/settings_page_cardview_height"
             android:layout_gravity="center"
             android:clickable="true"
             android:layout_marginStart="10dp"
-            app:cardCornerRadius="100dp">
+            app:cardCornerRadius="@dimen/settings_page_cardview_radius">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/Settings_camera_image_button"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/settings_page_imageview_width"
+                android:layout_height="@dimen/settings_page_imageview_height"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_person"></com.google.android.material.imageview.ShapeableImageView>
+                android:src="@drawable/ic_person" />
         </androidx.cardview.widget.CardView>
          <TextView
              android:id="@+id/Settings_user_profile_name"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="user name"
+             android:text="@string/settings_page_user_name_tag"
              android:layout_toRightOf="@id/Settings_profile_cardview"
              android:layout_marginStart="10dp"
              android:layout_marginTop="10dp"
-             android:textSize="20sp"/>
+             android:textSize="@dimen/settings_page_username_tag_text_size"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hey there! I am using WhatsApp."
+            android:text="@string/settings_page_tag_hint_text"
             android:layout_below="@id/Settings_user_profile_name"
             android:layout_toRightOf="@id/Settings_profile_cardview"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:textSize="15sp"/>
-
-
-
+            android:textSize="@dimen/settings_page_username_hint_text_size"/>
     </RelativeLayout>
 
 

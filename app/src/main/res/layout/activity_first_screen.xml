@@ -16,7 +16,7 @@
         android:gravity="center"
         android:text="@string/firstScreen_header"
         android:textAlignment="center"
-        android:textColor="#006400"
+        android:textColor="@color/tree_green"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toRightOf="@id/Add_new_contact_close"
-                android:text="Add new Contacts to Firebase"
+                android:text="@string/Add_new_contact_header"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:divider="@color/white"
-        app:boxStrokeColor="#006FFF"
+        app:boxStrokeColor="@color/neon_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,14 +70,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/texteditbackground"
-            android:hint="Name" />
+            android:hint="@string/add_new_contact_name_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/white"
-        app:boxStrokeColor="#006FFF"
+        app:boxStrokeColor="@color/neon_blue"
         app:layout_constraintTop_toBottomOf="@id/add_new_contact_nickName_layout"
         tools:layout_editor_absoluteX="-35dp"
         tools:layout_editor_absoluteY="161dp"
@@ -90,6 +90,6 @@
             android:layout_height="wrap_content"
             android:inputType="phone"
             android:background="@drawable/texteditbackground"
-            android:hint="Phone" />
+            android:hint="@string/add_new_contact_phone_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
