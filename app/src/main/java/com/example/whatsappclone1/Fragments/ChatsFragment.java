@@ -21,6 +21,7 @@ import com.example.whatsappclone1.Contacts;
 import com.example.whatsappclone1.PersonalChat;
 import com.example.whatsappclone1.R;
 import com.example.whatsappclone1.userModel.UserModel;
+import com.example.whatsappclone1.userModel.WhatsAppStatusModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -59,6 +60,7 @@ public class ChatsFragment extends Fragment {
         ChatRecyclerView = v.findViewById(R.id.RecyclerView);
         Contact=v.findViewById(R.id.chats_floating_action_button);
         userModel=new UserModel();
+
         sharedPreferences= getActivity().getSharedPreferences("user_phone_number", MODE_PRIVATE);
         String userMobileNumber = sharedPreferences.getString("userPhoneNumber", "");
         Query query = firestore.collection("AllUsers").whereNotEqualTo("userPhonenumber", userMobileNumber);

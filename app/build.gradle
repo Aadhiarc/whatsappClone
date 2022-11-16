@@ -42,8 +42,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
     implementation 'com.google.firebase:firebase-storage:20.1.0'
     implementation 'com.google.firebase:firebase-database:20.1.0'
-    implementation 'androidx.navigation:navigation-fragment:2.5.2'
-    implementation 'androidx.navigation:navigation-ui:2.5.2'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
@@ -53,14 +53,16 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
-    //video trimmer
-    implementation 'com.github.a914-gowtham:android-video-trimmer:1.7.3'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+//    //video trimmer
+//    implementation 'com.github.a914-gowtham:android-video-trimmer:1.7.3'
     //checking permission
     implementation 'com.karumi:dexter:6.2.3'
-    //for video compressing
-    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.4'
-    implementation 'com.googlecode.mp4parser:isoparser:1.1.22'
+//    //for video compressing
+//    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.4'
+//    implementation 'com.googlecode.mp4parser:isoparser:1.1.22'
+    //for status progressView
 
+    implementation 'com.github.shts:StoriesProgressView:3.0.0'
 
 }

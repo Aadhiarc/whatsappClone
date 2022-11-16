@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.whatsappclone1.Adapters.ViewPagerMessengerAdapter;
+import com.example.whatsappclone1.userModel.WhatsAppStatusModel;
 import com.google.android.material.tabs.TabLayout;
 
 public class Tabbed_layout extends AppCompatActivity {
@@ -31,6 +32,8 @@ public class Tabbed_layout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_layout);
+
+
         tabLayout=findViewById(R.id.tab_layout);
         viewPager=findViewById(R.id.view_pager);
         mToolbar=findViewById(R.id.toolbar);

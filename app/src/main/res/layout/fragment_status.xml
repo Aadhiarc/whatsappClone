@@ -89,15 +89,23 @@
             android:text="Tap to add status update" />
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/statusfragmentRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="665dp"
-        android:layout_marginBottom="1dp"
+    <!--button for opening our stories activity-->
+    <Button
+        android:id="@+id/idBtnStories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/neon_blue"
+        android:onClick="ShowStories"
+        android:text="Show Stories"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/updateStatus"
-        android:fitsSystemWindows="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/updateStatus"
+        app:layout_constraintVertical_bias="0.5" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,9 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
-import com.gowtham.library.utils.LogMessage;
-import com.gowtham.library.utils.TrimType;
-import com.gowtham.library.utils.TrimVideo;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -88,14 +85,6 @@ public class VideoTrimmer extends AppCompatActivity {
 
 
 
-    void trimVideo(Uri videoUri){
-        TrimVideo.activity(String.valueOf(videoUri))
-                .setHideSeekBar(true)
-                .setTrimType(TrimType.FIXED_DURATION)
-                .setFixedDuration(30)
-                .start(this,startForResult);
-
-    }
 
     void forResult(){
         startForResult = registerForActivityResult(
@@ -116,8 +105,10 @@ public class VideoTrimmer extends AppCompatActivity {
                             }
                         });
 
-                    } else
-                        LogMessage.v("videoTrimResultLauncher data is null");
+                    } else{
+
+                    }
+
                 });
     }
 

@@ -29,13 +29,16 @@ public class OpenCamera extends AppCompatActivity {
         Bitmap bitmap= (Bitmap) data.getExtras().get("data");
         Uri uri=getImageUri(OpenCamera.this,bitmap);
        fireStoreDataBASE.sentWhatsAppStatusImagesPutCloudStorage(OpenCamera.this,uri);
+        fireStoreDataBASE.retrieveData(this);
        startActivity(new Intent(OpenCamera.this,Tabbed_layout.class));
+
     }
     //convert bitmap into uri
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+
         return Uri.parse(path);
     }
 }
