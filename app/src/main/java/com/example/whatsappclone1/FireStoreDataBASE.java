@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.whatsappclone1.userModel.WhatsAppStatusModel;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -150,7 +149,7 @@ public class FireStoreDataBASE  {
     public  void sentWhatsAppStatusImagesPutCloudStorage(Context context,Uri uri){
         storage=FirebaseStorage.getInstance();
         auth=FirebaseAuth.getInstance();
-        StorageReference storageReference=storage.getReference("WhatsAppStatus/"+auth.getCurrentUser().getPhoneNumber()+"/"+"Images/"+auth.getCurrentUser().getPhoneNumber()+".png");
+        StorageReference storageReference=storage.getReference("WhatsAppStatus/"+auth.getCurrentUser().getPhoneNumber()+"/"+"Images/"+UUID.randomUUID()+".png");
         UploadTask uploadTask=storageReference.putFile(uri);
         uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -187,7 +186,7 @@ public class FireStoreDataBASE  {
 
 
   //to change new number
- public void dataPutNewName(String user_name,String user_dp,String user_mob){
+  void dataPutNewName(String user_name,String user_dp,String user_mob){
       fireStore= FirebaseFirestore.getInstance();
       auth=FirebaseAuth.getInstance();
       userID =  auth.getCurrentUser().getUid();
@@ -206,30 +205,7 @@ public class FireStoreDataBASE  {
       });
 
   }
-    //to retrieve data from whatsapps status from cloud storage
-   public void retrieveData(Context context){
 
-        fireStore= FirebaseFirestore.getInstance();
-        auth=FirebaseAuth.getInstance();
-        userID =  auth.getCurrentUser().getUid();
-        StorageReference storageReference=storage.getReference("WhatsAppStatus/"+auth.getCurrentUser().getPhoneNumber()+"/"+"Images/"+auth.getCurrentUser().getPhoneNumber()+".png");
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            Uri image=null;
-            @Override
-            public void onSuccess(Uri uri) {
-                WhatsAppStatusModel whatsAppStatusModel=new WhatsAppStatusModel(uri);
-               image=uri;
-                System.out.println(image);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                System.out.println(e);
-            }
-        });
-
-
-    }
 
 
 }
