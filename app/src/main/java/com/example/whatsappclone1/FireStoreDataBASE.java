@@ -186,7 +186,7 @@ public class FireStoreDataBASE  {
 
 
   //to change new number
-  void dataPutNewName(String user_name,String user_dp,String user_mob){
+ public void dataPutNewName(String user_name,String user_dp,String user_mob){
       fireStore= FirebaseFirestore.getInstance();
       auth=FirebaseAuth.getInstance();
       userID =  auth.getCurrentUser().getUid();
@@ -205,7 +205,26 @@ public class FireStoreDataBASE  {
       });
 
   }
+    //to retrieve data from whatsapps status from cloud storage
+   public void retrieveData(Context context){
+        fireStore= FirebaseFirestore.getInstance();
+        auth=FirebaseAuth.getInstance();
+        userID =  auth.getCurrentUser().getUid();
+        StorageReference storageReference=storage.getReference("WhatsAppStatus/"+auth.getCurrentUser().getPhoneNumber()+"/"+"Images");
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                System.out.println(uri+"downloadUri");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(e);
+            }
+        });
 
+
+    }
 
 
 }
