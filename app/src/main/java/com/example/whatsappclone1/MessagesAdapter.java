@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +50,12 @@ public class MessagesAdapter extends RecyclerView.Adapter {
           senderViewHolder.textViewMessage.setText(msg);
             senderViewHolder.timeOfMessage.setText(messageDb.getCurrenttime());
             Picasso.get().load(messageDb.getSentImages()).into(senderViewHolder.sentImage);
+            senderViewHolder.location.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
         }else{
             RecieverViewHolder ViewHolder=(RecieverViewHolder) holder;
             String rMsg=messageDb.getMessage();
@@ -56,6 +63,12 @@ public class MessagesAdapter extends RecyclerView.Adapter {
             ViewHolder.textViewMessage.setText(rMsg);
             ViewHolder.timeOfMessage.setText(messageDb.getCurrenttime());
             Picasso.get().load(messageDb.getSentImages()).into(ViewHolder.recievedImage);
+            ViewHolder.location.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
         }
 
@@ -84,24 +97,28 @@ public class MessagesAdapter extends RecyclerView.Adapter {
         TextView textViewMessage;
         TextView timeOfMessage;
         ImageView sentImage;
+        View location;
         public SenderViewHolder(@NonNull View itemView) {
 
             super(itemView);
             textViewMessage=itemView.findViewById(R.id.senderMessage);
             timeOfMessage=itemView.findViewById(R.id.timeofmeassage);
             sentImage=itemView.findViewById(R.id.senderChatSentImages);
+            location=itemView.findViewById(R.id.google_maps);
         }
     }
     class RecieverViewHolder extends RecyclerView.ViewHolder {
         TextView textViewMessage;
         TextView timeOfMessage;
         ImageView recievedImage;
+        View location;
         public RecieverViewHolder(@NonNull View itemView) {
 
             super(itemView);
             textViewMessage=itemView.findViewById(R.id.ReciveveMessage);
             timeOfMessage=itemView.findViewById(R.id.Recivevetimeofmeassage);
             recievedImage=itemView.findViewById(R.id.recieverChatSentImages);
+            location=itemView.findViewById(R.id.google_maps);
         }
     }
 

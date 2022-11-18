@@ -159,6 +159,24 @@
             app:layout_constraintBottom_toTopOf="@id/CameraBtn_personal_chat"
             app:layout_constraintLeft_toRightOf="@id/getmessage"
             app:layout_constraintStart_toEndOf="@+id/getmessage" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/LocationBtn_personal_chat"
+            android:layout_width="@dimen/personal_chat_galleryBtn_width"
+            android:layout_height="@dimen/personal_chat_galleryBtn_height"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:backgroundTint="@color/dark_green"
+            android:src="@drawable/ic_baseline_location_on_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/GalleryBtn_personal_chat"
+            app:layout_constraintLeft_toRightOf="@id/getmessage"
+            app:layout_constraintStart_toEndOf="@+id/getmessage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </RelativeLayout>

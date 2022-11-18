@@ -1,8 +1,12 @@
 package com.example.whatsappclone1;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -18,7 +22,6 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.whatsappclone1.Adapters.ViewPagerMessengerAdapter;
-import com.example.whatsappclone1.userModel.WhatsAppStatusModel;
 import com.google.android.material.tabs.TabLayout;
 
 public class Tabbed_layout extends AppCompatActivity {
@@ -33,7 +36,7 @@ public class Tabbed_layout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_layout);
 
-
+        createNotificationChannel();
         tabLayout=findViewById(R.id.tab_layout);
         viewPager=findViewById(R.id.view_pager);
         mToolbar=findViewById(R.id.toolbar);
@@ -58,6 +61,19 @@ public class Tabbed_layout extends AppCompatActivity {
                 startActivityForResult(open,100);
             }
         });
+    }
+
+    private void createNotificationChannel() {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            CharSequence channelName="alarmApp";
+            String description="Alarm remainder";
+            int importance= NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel=new NotificationChannel("Message",channelName,importance);
+            channel.setDescription(description);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            NotificationManager notificationManager=getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     @Override
