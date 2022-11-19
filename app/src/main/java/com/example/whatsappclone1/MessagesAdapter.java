@@ -6,12 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone1.userModel.MessageDb;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
@@ -22,6 +23,8 @@ public class MessagesAdapter extends RecyclerView.Adapter {
     ArrayList<MessageDb> messageDbArrayList;
     int ITEM_SEND=1;
     int ITEM_RECIEVE=2;
+    SupportMapFragment supportMapFragment;
+    FusedLocationProviderClient fusedLocationProviderClient;
 
     public MessagesAdapter(Context context, ArrayList<MessageDb> messageDbArrayList) {
         this.context = context;
@@ -31,13 +34,13 @@ public class MessagesAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       if(viewType==ITEM_SEND){
-           View view= LayoutInflater.from(context).inflate(R.layout.senderchatlayout,parent,false);
-           return  new SenderViewHolder(view);
-       }else {
-           View view= LayoutInflater.from(context).inflate(R.layout.recieverlayout,parent,false);
-           return  new RecieverViewHolder(view);
-       }
+        if(viewType==ITEM_SEND){
+            View view= LayoutInflater.from(context).inflate(R.layout.senderchatlayout,parent,false);
+            return  new SenderViewHolder(view);
+        }else {
+            View view= LayoutInflater.from(context).inflate(R.layout.recieverlayout,parent,false);
+            return  new RecieverViewHolder(view);
+        }
     }
 
     @Override
@@ -46,16 +49,16 @@ public class MessagesAdapter extends RecyclerView.Adapter {
         MessageDb messageDb=messageDbArrayList.get(position);
         if(holder.getClass()==SenderViewHolder.class){
             SenderViewHolder senderViewHolder=(SenderViewHolder) holder;
-          String msg=messageDb.getMessage();
-          senderViewHolder.textViewMessage.setText(msg);
+            String msg=messageDb.getMessage();
+            senderViewHolder.textViewMessage.setText(msg);
             senderViewHolder.timeOfMessage.setText(messageDb.getCurrenttime());
             Picasso.get().load(messageDb.getSentImages()).into(senderViewHolder.sentImage);
-            senderViewHolder.location.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
-                }
-            });
+           senderViewHolder.location.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+               }
+           });
         }else{
             RecieverViewHolder ViewHolder=(RecieverViewHolder) holder;
             String rMsg=messageDb.getMessage();
@@ -104,7 +107,7 @@ public class MessagesAdapter extends RecyclerView.Adapter {
             textViewMessage=itemView.findViewById(R.id.senderMessage);
             timeOfMessage=itemView.findViewById(R.id.timeofmeassage);
             sentImage=itemView.findViewById(R.id.senderChatSentImages);
-            location=itemView.findViewById(R.id.google_maps);
+            location=itemView.findViewById(R.id.google_maps_sender);
         }
     }
     class RecieverViewHolder extends RecyclerView.ViewHolder {

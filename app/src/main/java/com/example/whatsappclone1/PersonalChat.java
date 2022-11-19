@@ -1,15 +1,12 @@
 package com.example.whatsappclone1;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,23 +24,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone1.userModel.MessageDb;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -75,9 +61,6 @@ public class PersonalChat extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar mPersonalChatToolBar;
     ImageView mImageViewOfSpecificUser;
     TextView mTextViewOfSpecificUser;
-    SupportMapFragment supportMapFragment;
-    FusedLocationProviderClient fusedLocationProviderClient;
-
     String enteredMessage;
     Intent intent;
     String mRecieverName,mSenderName,mReceiverPhoneNumber,mSenderPhoneNumber;
@@ -96,13 +79,12 @@ public class PersonalChat extends AppCompatActivity {
     Uri imageUri;
     String mUserProfilePic;
     PendingIntent pendingIntent;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_chat);
-        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_maps);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mGetMessage=findViewById(R.id.getmessage);
         mSendMessageCardView=findViewById(R.id.Personal_profile_cardview);
         mSendMessageButton=findViewById(R.id.sendMessageBtn);
@@ -313,58 +295,16 @@ public class PersonalChat extends AppCompatActivity {
         mLocationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(PersonalChat.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    getcurrentLocation();
-                } else {
-                    askPermission();
-                }
+               Intent i =new Intent(PersonalChat.this,mapsFragment.class);
+               startActivity(i);
             }
         });
 
     }
 
-    private void getcurrentLocation() {
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
 
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                System.out.println(location.getLatitude() + " aaaaa");
-                if(location!=null){
-                    supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-                        @Override
-                        public void onMapReady(@NonNull GoogleMap googleMap) {
-                            LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
-                            MarkerOptions markerOptions=new MarkerOptions().position(latLng);
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-                            googleMap.addMarker(markerOptions);
-                        }
-                    });
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-            }
-        });
 
-    }
-
-    private void askPermission() {
-        ActivityCompat.requestPermissions(PersonalChat.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -433,13 +373,5 @@ public class PersonalChat extends AppCompatActivity {
             messagesAdapter.notifyDataSetChanged();
         }
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode==100){
-            if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                getcurrentLocation();
-            }
-        }
-    }
+
 }

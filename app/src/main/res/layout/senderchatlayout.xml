@@ -38,14 +38,14 @@
              android:layout_height="wrap_content"
              android:layout_alignTop="@id/timeofmeassage"
              android:layout_marginTop="20dp" />
-         <androidx.fragment.app.FragmentContainerView
-             android:layout_centerInParent="true"
-             android:layout_width="300dp"
-             android:layout_height="300dp"
-             android:id="@+id/google_maps"
-             android:clickable="true"
-             android:focusable="true"
-             android:visibility="gone"
-             android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+             <com.google.android.gms.maps.MapView
+                 android:layout_width="300dp"
+                 android:layout_height="300dp"
+                 android:id="@+id/google_maps_sender"
+                 android:visibility="gone"
+                 android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
      </RelativeLayout>
 </RelativeLayout>
